@@ -1,3 +1,4 @@
+import jsx from 'hyperscript';
 import { registerImage } from './lazy';
 
 const maximun = 121;
@@ -5,38 +6,32 @@ const minimun = 1;
 const random = () => Math.floor(Math.random()*(maximun - minimun)+ minimun)
 
 const createImageNode = () => {
-    const container = document.createElement('div');
-    container.className = "p-4";
-
-    const imagen = document.createElement('img');
-    imagen.className = "mx-auto";
-    imagen.width = '320';
 
     /*
-      1. forma
-      Si no queremos que una imagen cargue tenemos que eliminar
-      la parte que la carga ya que esta linea trae la url de la imagen
-      por lo tanto la hara cargar siempre.
-
-      Pasaremos este trabajo de cargar la imagen al lazy loading
-
-      2.forma
-
-      La informacion de la url se la dejaremos a la imagen pero 
-      utilizaremos el dataset  que es una propiedad de html
-
-      Dataset se utiliza mucho para comunicar informacion entre html
-      y js, es muy comun tener diferentes data-? para comunicar la info
-    
+        const image = document.createElement('img');
+        image.className = "mx-auto";
+        image.width = '320';
+        image.dataset.src = `https://randomfox.ca/images/${random()}.jpg`;
     */
-
-    //imagen.src = `https://randomfox.ca/images/${random()}.jpg`;
-
-    // Esto agregara a la propieda data-src de mi imagen la url
-    imagen.dataset.src = `https://randomfox.ca/images/${random()}.jpg`;
+    // Uso hypescript para hacer las 4 lineas anteriores
+    const image = jsx("img.mx-auto", {
+        width: "320",
+        'data-src': `https://randomfox.ca/images/${random()}.jpg`,
+    })
     
-  
-    container.appendChild(imagen)
+    /*
+        const container = document.createElement('div');
+        container.className = "p-4";
+    */
+    // Las dos anteriores lineas las puedo resumir con la ayuda de hyperscript
+    const container = jsx("div.p-4.mt-3", image);
+
+    // Usando react: const container = <div className="p-4 mt-3"><imagen /> </div>
+
+    // jsx -> html (react)
+
+    // le paso la imagen al contenedor usando hypescript 
+    // container.appendChild(image)
 
     appendedImages++;
     printLog();
