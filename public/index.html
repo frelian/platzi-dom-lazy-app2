@@ -50,12 +50,23 @@
         </p>
 
         <button class="mt-6 p-3 bg-indigo-500 text-white font-bold rounded-full">Agregar imagen</button>
+        <button class="p-3" id="clean">Limpiar</button>
         <div id="images"></div>
         
       </div>
     </div>
 
     <!-- Add more scripts here -->
+    <script>
+      let appendedImages = 0;
+      let loadedImages = 0;
+  
+      const printLog = () => {
+      console.log(`⚪ Se han agregado ${appendedImages} imágenes`);
+      console.log(`🟣 Se han cargado ${loadedImages} imágenes`);
+      console.log("---------------------------------------");
+      }
+  </script>
     <script type="module" src="%PUBLIC_URL%/_dist_/index.js"></script>
   </body>
 </html>
